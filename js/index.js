@@ -25,6 +25,9 @@ $(function(){
     var mineImg = new Image(20, 20);
     mineImg.src = "images/explosion.png";
     mineImg.className = "mine-img";
+    var badFlagImg = new Image(15, 15);
+    badFlagImg.src = "images/wrong.png";
+    badFlagImg.className = "wrong";
     // set default difficulty
     setDifficulty("beginner");
     initialize();
@@ -116,7 +119,7 @@ $(function(){
                 var c = Math.floor(Math.random()*width);
             }while (mines[r][c].isMine || Math.abs(r-clickRow) < 2 && Math.abs(c-clickCol) < 2)
             mines[r][c].isMine = true;
-            $("#"+r+"_"+c).addClass("mine no-flag");
+            $("#"+r+"_"+c).addClass("mine");
         }
         
     }
@@ -168,7 +171,8 @@ $(function(){
             }else if(mines[r][c].isMine){
                 gameOver = true;
                 $("#"+r+"_"+c).addClass("flipped");
-                $(".mine.no-flag").append(mineImg.cloneNode());
+                $(".mine:not(.flagged)").append(mineImg.cloneNode());
+                $(".flagged:not(.mine)").empty().append(badFlagImg.cloneNode());
                 $("#smiley > img").css({
                     "margin-left": -4.45+"rem",
                     "margin-top": -2.25+"rem"
@@ -213,12 +217,12 @@ $(function(){
         mines[r][c].flagged = !mines[r][c].flagged;
         if (mines[r][c].flagged){
             square.append(flagImg.cloneNode());
-            square.removeClass("no-flag");
+            square.addClass("flagged");
             flagged++;
         }else{
             flagged--;
             square.empty();
-            square.addClass("no-flag");
+            square.removeClass("flagged");
         }
         $("#mine-count").html(numMines-flagged);
     }
@@ -232,7 +236,7 @@ $(function(){
         gameOver = false;
         clearInterval(timeInterval);
         $("#smiley > img").css({
-            "margin-left": 0+"rem",
+            "margin-left": 0.016+"rem",
             "margin-top": 0+"rem"
         });
         $("#timer").html("0.00");

@@ -57,6 +57,11 @@ body{
     margin-left: .1rem;
 }
 
+.wrong{
+    margin-top: -.68rem;
+    margin-left: .1rem;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */

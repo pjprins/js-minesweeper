@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Minesweeper</title>
+        <link rel="icon" href="images/mine-icon.png">
         <!-- Required meta tags for Bootstrap and JQuery -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,16 +30,16 @@
                 <div class = "col-lg-2 col-md-2 col-sm-3 order-lg-1 order-md-1 order-sm-1">
                     <h5>
                         <span class="align-middle badge badge-info">
-                        Mines
-                        <span id="mine-count" class="badge badge-light"></span>
+                        Time
+                        <span id="timer" class="badge badge-light">0.00</span>
                         </span>
                     </h5>
                 </div>
                 <div class = "col-lg-2 col-md-2 col-sm-3 order-lg-2 order-md-3 order-sm-3">
                     <h5>
                         <span class="align-middle badge badge-info">
-                        Time
-                        <span id="timer" class="badge badge-light">0.00</span>
+                        Mines
+                        <span id="mine-count" class="badge badge-light"></span>
                         </span>
                     </h5>
                 </div>
@@ -49,6 +50,10 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 order-12">
                     <div class="btn-group">
+                        
+                        <!-- <button id="stats" type="button" class="btn btn-primary" data-toggle="" >
+                            Stats
+                        </button> -->
                         <button id="difficulty" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Difficulty
                         </button>
