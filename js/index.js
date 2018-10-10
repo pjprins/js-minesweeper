@@ -267,6 +267,7 @@ $(function(){
         
         // double left-click handler
         $(".square").dblclick(function(e){
+            e.preventDefault();
             var id = $(this).attr("id").split("_");
             var r = parseInt(id[0]);
             var c = parseInt(id[1]);
