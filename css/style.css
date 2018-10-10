@@ -1,0 +1,106 @@
+body{
+    
+    background-color: #e6e6e6!important;
+}
+#menu-area{
+    width: 36rem;
+    margin: auto;
+    margin-bottom: .5rem;
+    text-align: center;
+}
+
+#smiley{
+    width: 2.4rem;
+    height: 2.4rem;
+    overflow: hidden;
+    background-color: gray;
+    border: 2px outset #bfbfbf;
+    margin:auto;
+    margin-bottom: .2rem;
+}
+
+#smiley > img{
+    width: 11.1rem;
+    height: 6.7rem;
+}
+
+
+#game-container{
+    background-color: #404040;
+    margin: auto;
+}
+
+.square{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: gray;
+    border: 3px outset #adaaaa;
+    float: left;
+}
+
+.flipped{
+    background-color: #cccccc;
+    border: 1px solid #a9a8a8;
+}
+.flag{
+    margin-top: -.7rem;
+    margin-left: .1rem;
+}
+
+.mine-img{
+   margin-top: -.65rem;
+   margin-left: -.06rem;
+}
+
+.flipped > .mine-img{
+    margin-top: -.4rem;
+    margin-left: .1rem;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.m{
+    font-size: 1rem;
+    margin-left: .4rem;
+    font-family:Arial;
+}
+
+.m1{
+    color: blue;
+}
+
+.m2{
+    color: #336600;
+}
+
+.m3{
+    color: red;
+}
+
+.m4{
+    color: #00004d;
+}
+
+.m5{
+    color: brown;
+}
+
+.m6{
+    color: #008080;
+}
+
+.m7{
+    color: black;
+}
+
+.m8{
+    color: #e0e0d1
+}

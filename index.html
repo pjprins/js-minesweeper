@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Minesweeper</title>
+        <!-- Required meta tags for Bootstrap and JQuery -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- CSS imports -->
+        <link rel="stylesheet" href="css/style.css" type="text/css" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/ui-lightness/jquery-ui.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css">
+        
+        <!-- JS Imports -->
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.js"></script>
+        <!-- Rename the JQueryUI 'tooltip' and 'button' classes to 'uitooltip' and 'uibutton' so that they won't conflict with Bootstrap's 'tooltip' and 'button' classes. -->
+        <script>
+            $.widget.bridge('uitooltip', $.ui.tooltip);
+            $.widget.bridge('uibutton', $.ui.button);
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </head>
+    <body>
+        <div id="menu-area" class="container">
+            <div class = "row no-gutters justify-content-center">
+                <div class = "col-lg-2 col-md-2 col-sm-3 order-lg-1 order-md-1 order-sm-1">
+                    <h5>
+                        <span class="align-middle badge badge-info">
+                        Mines
+                        <span id="mine-count" class="badge badge-light"></span>
+                        </span>
+                    </h5>
+                </div>
+                <div class = "col-lg-2 col-md-2 col-sm-3 order-lg-2 order-md-3 order-sm-3">
+                    <h5>
+                        <span class="align-middle badge badge-info">
+                        Time
+                        <span id="timer" class="badge badge-light">0.00</span>
+                        </span>
+                    </h5>
+                </div>
+                <div class="col-lg-4 order-lg-3 col-md-3 order-md-2 col-sm-1 order-sm-2">
+                    <div id="smiley">
+                        <img src="images/faces.png";>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 order-12">
+                    <div class="btn-group">
+                        <button id="difficulty" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Difficulty
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="difficulty">
+                            <button id="beginner" class="dif-optn preset dropdown-item active" type="button">Beginner</button>
+                            <button id="intermediate" class="dif-optn preset dropdown-item" type="button">Intermediate</button>
+                            <button id="expert" class="dif-optn preset dropdown-item" type="button">Expert</button>
+                            <button id="custom" class="dif-optn dropdown-item" type="button" data-toggle="modal" data-target="#get-options">
+                                Custom
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="game-container" class="noselect"></div>
+        <div class="modal fade" id="get-options" tabindex="-1" role="dialog" aria-labelledby="custom" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Custom Game Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <label for="width-select">
+                    <span class="badge badge-success">
+                    Width
+                    <span id="wval" class="badge badge-light">8</span>
+                    </span>
+                </label>
+                <input type="range" class="custom-range" id="width-select" min=8 max=30 step=1 value=8>
+                <label for="height-select">
+                    <span class="badge badge-success">
+                    Height
+                    <span id="hval" class="badge badge-light">8</span>
+                    </span>
+                </label>
+                <input type="range" class="custom-range" id="height-select" min=8 max=30 step=1 value=8>
+                <label for="mine-select">
+                    <span class="badge badge-dark">
+                    Mines
+                    <span id="mval" class="badge badge-light">8</span>
+                    </span>
+                </label>
+                <input type="range" class="custom-range" id="mine-select" min=1 max=51 step=1 value=8>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="start-btn" class="btn btn-primary" data-dismiss="modal">Start</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </body>
+</html>
