@@ -1,4 +1,5 @@
 $(function(){
+    // default difficulty settings
     var defaults = {
         beginner: {
             size: 8,
@@ -13,10 +14,10 @@ $(function(){
             mines: 99
         }
     };
+    // variables used in game
     var difficulty, width, height, numMines, 
         firstClick, gameOver, flipped, flagged,
-        time, timeInterval;
-    var mines = [];
+        time, timeInterval, mines;
     // set up images
     var flagImg = new Image(15, 15);
     flagImg.src = "images/flag.png";
@@ -24,13 +25,16 @@ $(function(){
     var mineImg = new Image(20, 20);
     mineImg.src = "images/explosion.png";
     mineImg.className = "mine-img";
+    // set default difficulty
     setDifficulty("beginner");
     initialize();
     
+    // disable right click functionality
     $("#game-contianer").contextmenu(function(e) {
         e.preventDefault();
     });
     
+    // handle Beginner, Intermediate, Expert presets
     $(".preset").click(function() {
         $(".dif-optn").removeClass("active");
         $(this).addClass("active");
@@ -38,6 +42,12 @@ $(function(){
         initialize();
     });
     
+    /**
+     * Changes the upper limit for mines in the 
+     * custom game dialogue. Maintains an 80%
+     * maximum ratio and adjusts the mine bar and
+     * number accordingly.
+     */
     function updateMineBar(newWidth, newHeight){
         var newMax = Math.floor(newHeight*newWidth*.8);
         if ($("#mine-select").val() > newMax){
@@ -47,23 +57,27 @@ $(function(){
         $("#mine-select").attr("max", newHeight*newWidth*.8);
     }
     
+    // Handle width change in the custom dialogue
     $("#width-select").on("input", function(){
         var newWidth = $(this).val();
         $("#wval").html(newWidth);
         updateMineBar(newWidth, $("#height-select").val());
     });
     
+    // Handle height change in the custom dialogue
     $("#height-select").on("input", function(){
         var newHeight = $(this).val();
         $("#hval").html(newHeight);
         updateMineBar($("#width-select").val(), newHeight);
     });
     
+    // Handle mine number change in the custom dialogue
     $("#mine-select").on("input", function(){
         var newMines = $(this).val();
         $("#mval").html(newMines);
     });
     
+    // Handle start click in custom dialogue
     $("#start-btn").click(function() {
         $(".dif-optn").removeClass("active");
         $("#custom").addClass("active");
@@ -76,13 +90,16 @@ $(function(){
         
     });
     
+    // restart game using same criteria
     $("#smiley").click(initialize);
     
+    // update timer
     function incTime(){
         time += .01;
         $("#timer").html(time.toFixed(2));
     }
     
+    // change to a different preset
     function setDifficulty(newDifficulty){
         difficulty = newDifficulty
         width = defaults[newDifficulty].size;
@@ -91,6 +108,7 @@ $(function(){
         $("#mine-count").html(numMines);
     }
     
+    // add mines to the board
     function initMines(clickRow, clickCol){
         for (var i=0; i<numMines; i++){
             do{
@@ -103,6 +121,7 @@ $(function(){
         
     }
     
+    // count nearby squares where some property is true
     function countAdj(r, c, property){
         var count = 0;
         for(var i = Math.max(0, r-1); i<=Math.min(r+1, height-1); i++){
@@ -113,6 +132,7 @@ $(function(){
         return count;
     }
     
+    // flip square that isn't a mine
     function flipSquare(r, c){
         var square = $("#"+r+"_"+c);
         var mineCount = countAdj(r, c, "isMine");
@@ -131,6 +151,7 @@ $(function(){
         }
     }
     
+    // initial check on left click
     function squareClick(r, c){
         if (gameOver){
             return;
@@ -170,6 +191,7 @@ $(function(){
         } 
     }
     
+    // handle double click
     function squareDblClick(r, c){
         if(countAdj(r, c, "isMine") === countAdj(r, c, "flagged")){
             for(var i = Math.max(0, r-1); i<=Math.min(r+1, height-1); i++){
@@ -182,6 +204,7 @@ $(function(){
         }
     }
     
+    // toggle flags on right click
     function squareRightClick(r, c){
         if(gameOver || firstClick || mines[r][c].flipped){
             return;
@@ -231,6 +254,8 @@ $(function(){
                                             "class='square'</div>");
             }
         }
+        
+        // left-click handler
         $(".square").click(function(e){
             var id = $(this).attr("id").split("_");
             var r = parseInt(id[0]);
@@ -239,6 +264,8 @@ $(function(){
                 squareClick(r, c);
             }
         });
+        
+        // double left-click handler
         $(".square").dblclick(function(e){
             var id = $(this).attr("id").split("_");
             var r = parseInt(id[0]);
@@ -247,6 +274,8 @@ $(function(){
                 squareDblClick(r, c);
             }
         });
+        
+        // right-click handler
         $(".square").contextmenu(function(e){
             var id = $(this).attr("id").split("_");
             var r = parseInt(id[0]);
