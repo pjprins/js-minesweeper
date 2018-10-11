@@ -148,7 +148,7 @@ $(function(){
         }else{
             for(var i = Math.max(0, r-1); i<=Math.min(r+1, height-1); i++){
                 for(var j = Math.max(0, c-1); j<=Math.min(c+1, width-1); j++){
-                    if(!mines[i][j].flipped){flipSquare(i, j);}
+                    if(!mines[i][j].flipped && !mines[i][j].flagged){flipSquare(i, j);}
                 }
             }
         }
@@ -261,11 +261,22 @@ $(function(){
         
         // left-click handler
         $(".square").click(function(e){
+            e.preventDefault();
             var id = $(this).attr("id").split("_");
             var r = parseInt(id[0]);
             var c = parseInt(id[1]);
             if (!mines[r][c].flipped){
                 squareClick(r, c);
+            }
+        });
+        
+        // touchscreen handler
+        $(".square").on("touchend", function(e) {
+            e.preventDefault();
+            if ($(this).hasClass("flipped")){
+                $(this).dblclick()
+            }else{
+                $(this).click();
             }
         });
         
